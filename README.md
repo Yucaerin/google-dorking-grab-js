@@ -1,66 +1,69 @@
-# Google Image Domain Extractor
 
-This JavaScript script is designed to **extract unique domains** from Google Images search results based on a specific keyword or dork.  
-It’s useful when searching for a particular file path in Google Images and you want to quickly extract all the domains found.
+# Google Dork Domain Grabber Scripts
 
----
-
-## Features
-- **Filter URLs** by a specific path (e.g., `/wp-content/uploads/`).
-- **Extract unique domains only** (no duplicates).
-- **Automatically download** the results to a `domain_list.txt` file.
-- Can be run directly in the **browser console** (Chrome, Firefox, Edge, etc.).
+This repository contains **two JavaScript scripts** that you can paste into your browser's Developer Console to extract domain names from Google search results.
 
 ---
 
-## How to Use
+## 1. `filter_substring.js` — Extract Domains Matching a Specific Path
 
-1. **Open Google Images**  
-   Go to [https://images.google.com](https://images.google.com).
+### Purpose
+This script extracts domains from all URLs in the current page **that contain a specific substring** (for example: `/wp-content/uploads/`).
 
-2. **Search with your dork**  
-   Example:
+### How to Use
+1. Go to Google search results (Google Images or normal search) where your dork returns results.
+2. Scroll down to load all results on the current page.
+3. Open **Developer Tools** (Press `F12` or `Ctrl + Shift + I` / `Cmd + Option + I`).
+4. Go to the **Console** tab.
+5. Paste the entire script into the console.
+6. Change the value of:
+   ```js
+   var filterSubstring = "/wp-content/uploads/";
    ```
-   "/wp-content/uploads/"
-   ```
-
-3. **Scroll the page**  
-   Scroll down to load as many search results as possible.
-
-4. **Open Developer Tools**  
-   - Press `F12` or right-click → **Inspect** → go to the **Console** tab.
-
-5. **Paste the Script**  
-   - Copy the entire JavaScript script provided.
-   - Paste it into the console.
-   - Press **Enter**.
-   - [***NB***] b4 paste, edit the **Subfiltering** bit to fit your dork.
-
-6. **Automatic Download**  
-   - The script will:
-     - Collect all URLs containing your filter path.
-     - Extract unique domains.
-     - Automatically download them as `domain_list.txt`.
+   to match your dork path or keyword.
+7. Press **Enter**.
+8. The script will:
+   - Find all URLs containing that substring.
+   - Extract unique domains.
+   - Save them into a file named `domain_list.txt`.
 
 ---
 
-## Example Output
-If the search results contain:
-```
-https://example.com/wp-content/uploads/11/2024/logo.png
-https://testsite.org/wp-content/uploads/12/2022/banner.jpg
-https://example.com/wp-content/uploads/photo.jpg
-```
+## 2. `google_fetch.js` — Auto Pagination Domain Grabber
 
-The `domain_list.txt` will contain:
+### Purpose
+This script **automatically goes through multiple Google Search pages** (up to 100 pages by default) and extracts all unique domains.
+
+### How to Use
+1. Perform a Google search with your dork (on normal Google search, **not** Images).
+2. Open **Developer Tools** → **Console**.
+3. Paste the script.
+4. Press **Enter**.
+5. The script will:
+   - Fetch the current page's HTML.
+   - Extract all result links (ignoring Google internal links).
+   - Follow the “Next Page” link until no more results or until `MAX_PAGES` is reached.
+   - Save results to a file `google_search_domains.txt`.
+
+### Parameters You Can Change
+Inside the script:
+```js
+const MAX_PAGES = 100;   
+const PAUSE_MS  = 1200;  
 ```
-example.com
-testsite.org
-```
+You can adjust these values to control how many pages to scan and how fast.
 
 ---
 
-## Notes
-- Make sure to adjust the `filterSubstring` variable in the script to match the path you are looking for.
-- Only URLs containing that substring will be extracted.
-- If you want to extract all URLs without filtering by path, leave `filterSubstring` empty.
+## Notes & Tips
+- The **first script** is great for Google Images or filtered extraction from loaded HTML.
+- The **second script** is better for bulk grabbing across multiple Google Search pages.
+- Google may temporarily block requests if you scrape too aggressively — increase `PAUSE_MS` if this happens.
+- Always scroll down if the page uses lazy loading before running the first script.
+- For the second script, no scrolling is needed — it fetches HTML directly.
+
+---
+
+## Troubleshooting
+- If the first script returns fewer results than expected, make sure you have loaded all results on the page before running it.
+- If the second script stops early, it may be due to Google switching to infinite scroll — in that case, use a scrolling approach instead.
