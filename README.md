@@ -5,7 +5,7 @@ This repository contains **two JavaScript scripts** that you can paste into your
 
 ---
 
-## 1. `filter_substring.js` — Extract Domains Matching a Specific Path
+## 1. `dorking.js` — Extract Domains Matching a Specific Path
 
 ### Purpose
 This script extracts domains from all URLs in the current page **that contain a specific substring** (for example: `/wp-content/uploads/`).
@@ -29,7 +29,7 @@ This script extracts domains from all URLs in the current page **that contain a 
 
 ---
 
-## 2. `google_fetch.js` — Auto Pagination Domain Grabber
+## 2. `dorking-google-unimage.js` — Auto Pagination Domain Grabber
 
 ### Purpose
 This script **automatically goes through multiple Google Search pages** (up to 100 pages by default) and extracts all unique domains.
