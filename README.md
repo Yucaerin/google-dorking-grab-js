@@ -34,6 +34,7 @@ It’s useful when searching for a particular file path in Google Images and you
    - Copy the entire JavaScript script provided.
    - Paste it into the console.
    - Press **Enter**.
+   - [***NB***] b4 paste, edit the **Subfiltering** bit to fit your dork.
 
 6. **Automatic Download**  
    - The script will:
