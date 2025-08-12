@@ -5,7 +5,7 @@ This repository contains **two JavaScript scripts** that you can paste into your
 
 ---
 
-## 1. `dorking.js` — Extract Domains Matching a Specific Path
+## 1. `dorking.js` — Extract Domains Matching a Specific Path ( i using dorking.js for images.google.com )
 
 ### Purpose
 This script extracts domains from all URLs in the current page **that contain a specific substring** (for example: `/wp-content/uploads/`).
